@@ -15,7 +15,7 @@ resource "aws_vpc" "lab_vpc" {
   }
 }
 
-# 2. Subnet publiczny
+# 2. Public subnet
 resource "aws_subnet" "lab_subnet" {
   vpc_id                  = aws_vpc.lab_vpc.id
   cidr_block              = "10.0.1.0/24"
@@ -65,7 +65,7 @@ resource "aws_security_group" "lab_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["185.241.199.206/32"] # Twój publiczny IP
+    cidr_blocks = ["185.241.199.206/32"] 
   }
 
   ingress {
@@ -87,9 +87,6 @@ resource "aws_security_group" "lab_sg" {
     Name = "lab-sg"
   }
 }
-
-
-
 
 # 6. EC2 Instance
 resource "aws_instance" "lab_ec2" {
