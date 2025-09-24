@@ -1,6 +1,6 @@
 # AWS Learning Labs 🚀
 
-This repository documents my step-by-step journey of learning **AWS, Terraform, and DevOps practices**.  
+This repository documents my step-by-step journey of learning **AWS, Terraform, and DevOps practices**.
 The goal is to build a solid foundation in cloud, automation, and infrastructure-as-code while creating a practical portfolio.
 
 ---
@@ -45,10 +45,10 @@ The goal is to build a solid foundation in cloud, automation, and infrastructure
 ---
 
 ## ✅ Current Progress
-- [x] Day 1 – AWS IAM & Billing  
-- [x] Day 2 – Networking + EC2 manually  
-- [x] Day 3 – Terraform automation with nginx  
-- [ ] Day 4 – TBD  
+- [x] Day 1 – AWS IAM & Billing
+- [x] Day 2 – Networking + EC2 manually
+- [x] Day 3 – Terraform automation with nginx
+- [ ] Day 4 – TBD
 
 ---
 

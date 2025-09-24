@@ -65,7 +65,7 @@ resource "aws_security_group" "lab_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["185.241.199.206/32"] 
+    cidr_blocks = ["185.241.199.206/32"]
   }
 
   ingress {
@@ -102,7 +102,7 @@ resource "aws_instance" "lab_ec2" {
     http_tokens   = "optional"
   }
 
-    user_data = <<EOF
+  user_data = <<EOF
 #!/bin/bash
 echo "TEST USER DATA" > /tmp/test.txt
 apt-get update -y
@@ -115,6 +115,3 @@ EOF
     Name = "lab-ec2"
   }
 }
-
-
-

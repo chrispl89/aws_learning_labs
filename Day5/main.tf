@@ -146,7 +146,7 @@ resource "aws_lb" "lab_alb" {
   name               = var.alb_name
   load_balancer_type = "application"
   security_groups    = [aws_security_group.lab_sg.id]
-  subnets            = [
+  subnets = [
     aws_subnet.lab_subnet.id,
     aws_subnet.lab_subnet_b.id
   ]
