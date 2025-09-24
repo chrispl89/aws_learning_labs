@@ -3,7 +3,7 @@ name: terraform-ci
 on:
   push:
     paths:
-      - 'terraform/**.tf'
+      - 'Day6/terraform/**/*.tf'
       - '.github/workflows/terraform-ci.yml'
   pull_request:
 
@@ -12,15 +12,19 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform
+        working-directory: Day6/terraform
     steps:
       - uses: actions/checkout@v4
+
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
+
       - name: Terraform Fmt
         run: terraform fmt -check
+
       - name: Terraform Init (backend disabled)
         run: terraform init -backend=false
+
       - name: Terraform Validate
         run: terraform validate
