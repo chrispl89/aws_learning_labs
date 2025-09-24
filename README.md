@@ -5,50 +5,72 @@ The goal is to build a solid foundation in cloud, automation, and infrastructure
 
 ---
 
-## 📆 Learning Path
+## 🚀 Learning Path & Progress
 
-### Day 1 – AWS Account Setup
-- Configured IAM user with MFA
-- Enabled billing and cost management access
-- Installed AWS CLI and verified configuration
+### Day 1 – AWS Account & IAM Setup
+- Created IAM user, configured MFA
+- Enabled billing, cost monitoring
+- Installed AWS CLI and tested access
 
-### Day 2 – Networking Basics
-- Created custom **VPC**
-- Configured **Subnet**, **Route Table**, and **Internet Gateway**
-- Defined **Security Group** with SSH and HTTP access rules
-- Launched first **EC2 instance** manually
+### Day 2 – VPC & Networking Basics
+- Built custom VPC
+- Created Subnet, Route Table, Internet Gateway
+- Set up Security Group with SSH + HTTP
+- Launched first EC2 manually
 
-### Day 3 – Infrastructure as Code with Terraform
-- Installed Terraform and initialized first configuration
-- Automated deployment of:
-  - VPC, Subnet, IGW, Route Table
-  - Security Group (SSH only from my IP, HTTP for everyone)
-  - EC2 instance (`t3.micro`) with nginx pre-installed via `user_data`
-- Verified nginx page accessible via public IP
+### Day 3 – Terraform Intro & EC2 + NGINX
+- Initialized Terraform
+- Automated VPC, Subnet, SG, EC2
+- Used `user_data` to install NGINX
+- Verified web page accessible
+
+### Day 4 – Backup / Storage / Monitoring (if done)
+*(You can update this after you complete Day 4’s tasks)*
+
+### Day 5 – ALB + Load Balancing
+- Added ALB, Target Group, Listener
+- Created multiple EC2 instances for distribution
+- Verified round-robin routing
+
+### Day 6 – Hardened ALB + EC2 Architecture (this day)
+- Split into **two public subnets** across AZs
+- Introduced **two Security Groups**:
+  - ALB SG: HTTP from Internet
+  - App SG: SSH only from your IP, HTTP only from ALB
+- Enforced **IMDSv2** on EC2
+- Wrote robust `user_data` that installs NGINX on Ubuntu
+- Auto-detect your public IP for SSH
+- Added test script (`test.ps1`) to validate functionality
+- Integrated CI with GitHub Actions & pre-commit hooks
+
 
 ---
 
-## 🛠️ Tools & Tech
-- **AWS** (IAM, VPC, EC2, Billing)
-- **Terraform** (Infrastructure as Code)
-- **PowerShell** (automation on Windows)
-- **GitHub** (portfolio building)
+## 🔧 Tools & Technologies
+
+- AWS: VPC, EC2, Load Balancer, IGW, SG
+
+- Terraform: for Infrastructure as Code
+
+- PowerShell: local automation & testing
+
+- GitHub Actions: CI for Terraform formats & validation
+
+- Pre-commit: local quality checks (format, validate, lint)
 
 ---
 
-## 🔮 Next Steps
-- Add automation for multiple environments (dev/stage/prod)
-- Explore S3 + CloudFront
-- Deploy a containerized app on ECS or EKS
-- Implement monitoring and alerting
+## 📌 Current Status & Next Steps
+Day 6 is completed and verified.
+What’s next:
 
----
+- Refactor Day 6 into reusable Terraform modules (network, security, compute, ALB)
 
-## ✅ Current Progress
-- [x] Day 1 – AWS IAM & Billing
-- [x] Day 2 – Networking + EC2 manually
-- [x] Day 3 – Terraform automation with nginx
-- [ ] Day 4 – TBD
+- Add day 7 labs: e.g. modules, RDS, autoscaling, S3, monitoring
+
+- Enhance security (WAF, private subnets, bastion host)
+
+- Add documentation and diagrams per day
 
 ---
 
