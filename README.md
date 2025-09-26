@@ -24,9 +24,17 @@ The goal is to build a solid foundation in cloud, automation, and infrastructure
 - Used `user_data` to install NGINX
 - Verified web page accessible
 
-### Day 4 – Backup / Storage / Monitoring (if done)
-*(You can update this after you complete Day 4’s tasks)*
-
+### Day 4 – Backup / Storage / Monitoring
+- Refactored Terraform code:
+- Created full AWS environment:
+  - **VPC** with public subnet
+  - **Internet Gateway** and custom route table
+  - **Security Group** with SSH (restricted to my IP) and HTTP (open)
+  - **EC2 Instance** (Ubuntu 22.04, `t3.micro`)
+- Provisioned **Flask web app** automatically via `user_data`:
+  - Installed Python3 + Flask
+  - Deployed simple app returning `Hello from AWS Flask app! 🚀`
+  - Served directly on port **80**
 ### Day 5 – ALB + Load Balancing
 - Added ALB, Target Group, Listener
 - Created multiple EC2 instances for distribution
@@ -43,12 +51,53 @@ The goal is to build a solid foundation in cloud, automation, and infrastructure
 - Added test script (`test.ps1`) to validate functionality
 - Integrated CI with GitHub Actions & pre-commit hooks
 
+### Day 7
+- Refactored infrastructure into **Terraform modules**:
+  - `network`, `security`, `compute`, `alb`
+- Cleaner and reusable structure for future environments
+- Additional tests:
+  - SG rule validation (App SG allows 80 only from ALB SG)
+  - IMDSv2 enforcement check
+  - ALB → TG → EC2 health validation
 
+### Day 8
+- Added **S3 bucket** for static website hosting
+- Fronted by **CloudFront** for CDN distribution
+- Direct S3 access blocked (returns 403), site accessible only via CloudFront
+- Test script checks:
+  - CloudFront returns 200 on index.html
+  - S3 URL returns 403 AccessDenied
+
+### Day 9
+- Added **RDS (PostgreSQL)** in public subnets (lab exercise, later to be moved to private)
+- RDS SG allows DB port (5432) **only from App SG**
+- Connected via EC2 (installed `postgresql-client`) and verified queries
+- Automated validation:
+  - RDS instance details (status, engine, version, VPC, public=false)
+  - ALB target group health
+  - SG rule check (App SG ingress from ALB SG)
+- Manual test: insert + select from `health` table to confirm DB works
 ---
 
 ## 🔧 Tools & Technologies
 
-- AWS: VPC, EC2, Load Balancer, IGW, SG
+- Core AWS services used so far:
+
+  - IAM (credentials/profiles)
+
+  - VPC (subnets, IGW, routes)
+
+  - Security Groups
+
+  - EC2 (Ubuntu), cloud-init/user_data, IMDSv2
+
+  - ALB / Target Groups / Health checks
+
+  - S3 (static site)
+
+  - CloudFront (CDN in front of S3)
+
+  - RDS PostgreSQL
 
 - Terraform: for Infrastructure as Code
 
@@ -60,17 +109,35 @@ The goal is to build a solid foundation in cloud, automation, and infrastructure
 
 ---
 
-## 📌 Current Status & Next Steps
-Day 6 is completed and verified.
-What’s next:
+## 📌 Current status
 
-- Refactor Day 6 into reusable Terraform modules (network, security, compute, ALB)
+- Completed: Days 1 → 9, each with its own Terraform stack (kept intact to show evolution).
 
-- Add day 7 labs: e.g. modules, RDS, autoscaling, S3, monitoring
+- Pre-commit: enabled; commits run fmt/validate/tflint + whitespace fixers.
 
-- Enhance security (WAF, private subnets, bastion host)
+- CI: GitHub Actions workflow validates Terraform on push.
 
-- Add documentation and diagrams per day
+- Security posture (current lab scope):
+
+  - EC2 HTTP reachable only through ALB.
+
+  - SSH restricted to my_ip (/32).
+
+  - IMDSv2 enforced on EC2.
+
+  - RDS reachable only from App SG; not publicly accessible.
+
+  - CloudFront in front of S3 (origin access locked).
+
+### Next milestones (upcoming days):
+
+  - Move RDS to private subnets (+ NAT).
+
+  - Store secrets in Secrets Manager/SSM (no plain tfvars).
+
+  - Replace Nginx with a simple app connecting to Postgres (health tied to DB).
+
+  - Add autoscaling/observability and polish CI.
 
 ---
 
